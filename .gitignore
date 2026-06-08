@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# Secrets — never commit
+.env
+*.key
+*.pem
+secrets.*
+
+# Models / large artifacts
+*.gguf
+*.safetensors
+*.bin
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Lab data dumps (may contain sensitive test output)
+scratch/
+*.local.md
