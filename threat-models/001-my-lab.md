@@ -138,5 +138,7 @@ store, and a **LangChain** agent — the components this 8-week study attacks.
 
 ---
 
-*Next: Week 2 — build `injection_tester.py` and exercise surface #2 with categorized
-payloads against a local endpoint.*
+*Update: Week 2 exercised surface #2 — see [finding 001](../findings/001-prompt-injection)
+(categorized payloads vs a local `/chat` endpoint; direct attacks refused 0/10,
+framing-based attacks leak up to 90%). Next: Week 3 — surface #4, indirect prompt
+injection via document ingestion.*

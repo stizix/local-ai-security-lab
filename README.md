@@ -7,8 +7,9 @@ prompt injection, RAG poisoning, vector-store misconfiguration, agent exploitati
 and system-prompt extraction. Everything here is reproduced in my own lab or against
 open-source apps I run locally.
 
-> **Status: Week 1 — in progress.** This repo grows one verified finding at a time.
-> No claims without a runnable PoC. If a finding isn't here yet, I haven't proven it yet.
+> **Status: Week 2 complete — Week 3 in progress.** This repo grows one verified
+> finding at a time. No claims without a runnable PoC. If a finding isn't here yet,
+> I haven't proven it yet.
 
 ---
 
@@ -26,14 +27,12 @@ Mapped to the [OWASP LLM Top 10](https://owasp.org/www-project-top-10-for-large-
 
 ## Findings
 
-*None published yet — this section fills as I verify each one. Each finding ships with
-a reproducible PoC and an honest impact statement.*
+Each finding ships with a reproducible PoC and an honest impact statement. Full index
+in [`findings/`](./findings).
 
-<!--
 | # | Title | Stack | OWASP | Status |
 |---|-------|-------|-------|--------|
-| 001 | ... | ... | ... | Published |
--->
+| [001](./findings/001-prompt-injection) | Framing-based prompt injection leaks a system-prompt secret (translation 9/10, all direct attacks 0/10) | local FastAPI `/chat` + Ollama `llama3.2:3b` | LLM01, LLM06 | Published |
 
 ---
 
@@ -41,8 +40,17 @@ a reproducible PoC and an honest impact statement.*
 
 *Built as the study progresses:*
 
-- `tools/injection_tester.py` — fires categorized injection payloads at an LLM HTTP endpoint *(coming Week 2)*
+- `injection_tester.py` — fires categorized injection payloads at an LLM HTTP endpoint. Week 2 PoC shipped in [finding 001](./findings/001-prompt-injection/poc.py); a `--target`-parameterized version will be promoted to `tools/` once generalized.
 - `tools/chromadb_audit.py` — audits a ChromaDB instance for common misconfigs *(coming Week 4)*
+
+---
+
+## Labs
+
+Intentionally vulnerable apps I build as attack targets, so every finding is
+reproducible end-to-end.
+
+- [`labs/vulnerable_app/`](./labs/vulnerable_app) — minimal FastAPI `/chat` endpoint that concatenates user input into a system prompt with no data/instruction separation. The target for finding 001.
 
 ---
 
@@ -56,7 +64,8 @@ a reproducible PoC and an honest impact statement.*
 
 - **OS:** Windows 11, AMD Ryzen 7 8840HS, 16 GB RAM (CPU/iGPU inference, no dedicated GPU)
 - **Inference:** Ollama (local models, GGUF quantized)
-- **Planned target stack:** FastAPI gateway + ChromaDB vector store + LangChain agent
+- **Targets built so far:** FastAPI `/chat` victim app ([`labs/vulnerable_app/`](./labs/vulnerable_app))
+- **Planned target stack:** ChromaDB vector store + LangChain agent (Weeks 3–4)
 
 Testing is performed exclusively against systems I own or open-source apps I run
 locally. No unauthorized access. Disclosure follows the 90-day coordinated standard.
