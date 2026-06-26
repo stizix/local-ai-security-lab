@@ -7,7 +7,7 @@ prompt injection, RAG poisoning, vector-store misconfiguration, agent exploitati
 and system-prompt extraction. Everything here is reproduced in my own lab or against
 open-source apps I run locally.
 
-> **Status: Week 2 complete — Week 3 in progress.** This repo grows one verified
+> **Status: Week 3 complete — Week 4 in progress.** This repo grows one verified
 > finding at a time. No claims without a runnable PoC. If a finding isn't here yet,
 > I haven't proven it yet.
 
@@ -33,6 +33,7 @@ in [`findings/`](./findings).
 | # | Title | Stack | OWASP | Status |
 |---|-------|-------|-------|--------|
 | [001](./findings/001-prompt-injection) | Framing-based prompt injection leaks a system-prompt secret (translation 9/10, all direct attacks 0/10) | local FastAPI `/chat` + Ollama `llama3.2:3b` | LLM01, LLM06 | Published |
+| [002](./findings/002-indirect-injection) | Indirect prompt injection — a poisoned document leaks a secret to an innocent user (`SYSTEM:` framing 10/10, plain-English 2/10) | local RAG `/chat` + Ollama `llama3.2:3b` | LLM01, LLM06 | Published |
 
 ---
 
@@ -51,6 +52,7 @@ Intentionally vulnerable apps I build as attack targets, so every finding is
 reproducible end-to-end.
 
 - [`labs/vulnerable_app/`](./labs/vulnerable_app) — minimal FastAPI `/chat` endpoint that concatenates user input into a system prompt with no data/instruction separation. The target for finding 001.
+- [`labs/vulnerable_rag_app/`](./labs/vulnerable_rag_app) — minimal RAG `/chat` endpoint that retrieves a document and trusts it with the same authority as its instructions. The target for finding 002.
 
 ---
 

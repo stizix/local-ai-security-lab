@@ -140,5 +140,7 @@ store, and a **LangChain** agent — the components this 8-week study attacks.
 
 *Update: Week 2 exercised surface #2 — see [finding 001](../findings/001-prompt-injection)
 (categorized payloads vs a local `/chat` endpoint; direct attacks refused 0/10,
-framing-based attacks leak up to 90%). Next: Week 3 — surface #4, indirect prompt
-injection via document ingestion.*
+framing-based attacks leak up to 90%). Week 3 exercised surface #4 — see
+[finding 002](../findings/002-indirect-injection) (poisoned documents in a RAG store
+leak a secret to an innocent user; `SYSTEM:`-framed injections hijack 10/10).
+Next: Week 4 — surface #3, ChromaDB unauthenticated API.*
