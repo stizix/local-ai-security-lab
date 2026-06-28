@@ -25,3 +25,6 @@ Thumbs.db
 # Lab data dumps (may contain sensitive test output)
 scratch/
 *.local.md
+
+# ChromaDB lab persistence (created when you run the finding-003 target)
+chroma_data/

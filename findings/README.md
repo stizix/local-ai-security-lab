@@ -9,8 +9,9 @@ reproducible PoC and an honest impact statement.
 |---|---------|--------|-------|
 | [001](001-prompt-injection/) | Framing-based prompt injection leaks a system-prompt secret (translation 9/10, hypothetical 2/10; all instruction-based attacks 0/10) | local vulnerable FastAPI `/chat` | `llama3.2:3b` |
 | [002](002-indirect-injection/) | Indirect prompt injection — a poisoned document leaks a secret to an innocent user (`SYSTEM:` framing 10/10, `[ADMIN NOTE]` 9/10, plain-English 2/10) | local vulnerable RAG `/chat` | `llama3.2:3b` |
+| [003](003-chromadb-unauth/) | Unauthenticated ChromaDB — dump, poison, and delete a vector store with no credentials (default config, v2 API) | stock ChromaDB 1.5.9 | n/a (infra) |
 
-Next expected Week 4 (ChromaDB unauthenticated access).
+Next expected Week 5 (Ollama exposed on the network).
 
 Each finding will follow this structure:
 

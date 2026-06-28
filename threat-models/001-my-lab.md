@@ -142,5 +142,8 @@ store, and a **LangChain** agent — the components this 8-week study attacks.
 (categorized payloads vs a local `/chat` endpoint; direct attacks refused 0/10,
 framing-based attacks leak up to 90%). Week 3 exercised surface #4 — see
 [finding 002](../findings/002-indirect-injection) (poisoned documents in a RAG store
-leak a secret to an innocent user; `SYSTEM:`-framed injections hijack 10/10).
-Next: Week 4 — surface #3, ChromaDB unauthenticated API.*
+leak a secret to an innocent user; `SYSTEM:`-framed injections hijack 10/10). Week 4
+exercised surface #3 — see [finding 003](../findings/003-chromadb-unauth) (stock
+ChromaDB in default config: unauthenticated dump, poison, and delete of a vector store;
+the destructive `/reset` is now disabled by default but `DELETE /collections/{name}`
+is not). Next: Week 5 — surface #1, Ollama exposed on `0.0.0.0`.*

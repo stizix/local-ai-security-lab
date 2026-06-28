@@ -7,7 +7,7 @@ prompt injection, RAG poisoning, vector-store misconfiguration, agent exploitati
 and system-prompt extraction. Everything here is reproduced in my own lab or against
 open-source apps I run locally.
 
-> **Status: Week 3 complete — Week 4 in progress.** This repo grows one verified
+> **Status: Week 4 complete — Week 5 in progress.** This repo grows one verified
 > finding at a time. No claims without a runnable PoC. If a finding isn't here yet,
 > I haven't proven it yet.
 
@@ -34,6 +34,7 @@ in [`findings/`](./findings).
 |---|-------|-------|-------|--------|
 | [001](./findings/001-prompt-injection) | Framing-based prompt injection leaks a system-prompt secret (translation 9/10, all direct attacks 0/10) | local FastAPI `/chat` + Ollama `llama3.2:3b` | LLM01, LLM06 | Published |
 | [002](./findings/002-indirect-injection) | Indirect prompt injection — a poisoned document leaks a secret to an innocent user (`SYSTEM:` framing 10/10, plain-English 2/10) | local RAG `/chat` + Ollama `llama3.2:3b` | LLM01, LLM06 | Published |
+| [003](./findings/003-chromadb-unauth) | Unauthenticated ChromaDB — dump, poison & delete a vector store with no credentials (default config) | stock ChromaDB 1.5.9, v2 API | LLM06, API1 | Published |
 
 ---
 
@@ -42,7 +43,7 @@ in [`findings/`](./findings).
 *Built as the study progresses:*
 
 - `injection_tester.py` — fires categorized injection payloads at an LLM HTTP endpoint. Week 2 PoC shipped in [finding 001](./findings/001-prompt-injection/poc.py); a `--target`-parameterized version will be promoted to `tools/` once generalized.
-- `tools/chromadb_audit.py` — audits a ChromaDB instance for common misconfigs *(coming Week 4)*
+- `tools/chromadb_audit.py` — audits a ChromaDB instance for unauthenticated access (auth posture, collection enumeration, document dump; `--prove-write` for a self-cleaning write canary). Shipped in [finding 003](./findings/003-chromadb-unauth).
 
 ---
 
@@ -53,6 +54,7 @@ reproducible end-to-end.
 
 - [`labs/vulnerable_app/`](./labs/vulnerable_app) — minimal FastAPI `/chat` endpoint that concatenates user input into a system prompt with no data/instruction separation. The target for finding 001.
 - [`labs/vulnerable_rag_app/`](./labs/vulnerable_rag_app) — minimal RAG `/chat` endpoint that retrieves a document and trusts it with the same authority as its instructions. The target for finding 002.
+- [`labs/vulnerable_chromadb/`](./labs/vulnerable_chromadb) — a stock ChromaDB server in default (no-auth) config plus a seed script. No vulnerable app to write — the default config *is* the vulnerability. The target for finding 003.
 
 ---
 
@@ -66,8 +68,8 @@ reproducible end-to-end.
 
 - **OS:** Windows 11, AMD Ryzen 7 8840HS, 16 GB RAM (CPU/iGPU inference, no dedicated GPU)
 - **Inference:** Ollama (local models, GGUF quantized)
-- **Targets built so far:** FastAPI `/chat` victim app ([`labs/vulnerable_app/`](./labs/vulnerable_app))
-- **Planned target stack:** ChromaDB vector store + LangChain agent (Weeks 3–4)
+- **Targets built so far:** FastAPI `/chat` victim ([`labs/vulnerable_app/`](./labs/vulnerable_app)), RAG `/chat` victim ([`labs/vulnerable_rag_app/`](./labs/vulnerable_rag_app)), ChromaDB default-config target ([`labs/vulnerable_chromadb/`](./labs/vulnerable_chromadb))
+- **Planned target stack:** exposed Ollama (Week 5) + LangChain agent with tools (Week 8)
 
 Testing is performed exclusively against systems I own or open-source apps I run
 locally. No unauthorized access. Disclosure follows the 90-day coordinated standard.
