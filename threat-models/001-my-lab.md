@@ -149,4 +149,8 @@ the destructive `/reset` is now disabled by default but `DELETE /collections/{na
 is not). Week 5 exercised surface #1 — see [finding 004](../findings/004-exposed-ollama)
 (unauthenticated Ollama API: enumerate models and run inference on the host's hardware
 with no credentials; `/api/pull` and `/api/delete` are one unauthenticated call away).
-Next: Week 6 — system-prompt extraction across models.*
+Week 6 revisited surface #2 at scale — see [finding 005](../findings/005-cross-model-extraction)
+(one prefix-injection attack run against 6 local models: leak rate ranges 10/10 for an
+uncensored model down to 2/10 for well-aligned ones; alignment quality, not size, predicts
+exposure — and a re-test exposed a false `0/10` caused by capping a reasoning model's
+output). Next: Week 7 — stored/persistent RAG poisoning in a real vector store.*
