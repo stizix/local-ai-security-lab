@@ -7,7 +7,7 @@ prompt injection, RAG poisoning, vector-store misconfiguration, agent exploitati
 and system-prompt extraction. Everything here is reproduced in my own lab or against
 open-source apps I run locally.
 
-> **Status: Week 4 complete — Week 5 in progress.** This repo grows one verified
+> **Status: Week 5 complete — Week 6 in progress.** This repo grows one verified
 > finding at a time. No claims without a runnable PoC. If a finding isn't here yet,
 > I haven't proven it yet.
 
@@ -35,6 +35,7 @@ in [`findings/`](./findings).
 | [001](./findings/001-prompt-injection) | Framing-based prompt injection leaks a system-prompt secret (translation 9/10, all direct attacks 0/10) | local FastAPI `/chat` + Ollama `llama3.2:3b` | LLM01, LLM06 | Published |
 | [002](./findings/002-indirect-injection) | Indirect prompt injection — a poisoned document leaks a secret to an innocent user (`SYSTEM:` framing 10/10, plain-English 2/10) | local RAG `/chat` + Ollama `llama3.2:3b` | LLM01, LLM06 | Published |
 | [003](./findings/003-chromadb-unauth) | Unauthenticated ChromaDB — dump, poison & delete a vector store with no credentials (default config) | stock ChromaDB 1.5.9, v2 API | LLM06, API1 | Published |
+| [004](./findings/004-exposed-ollama) | Unauthenticated Ollama — enumerate models & run inference on the host's hardware with no credentials (pull/delete one call away) | stock Ollama `:11434` | LLM10, LLM05 | Published |
 
 ---
 

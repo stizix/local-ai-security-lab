@@ -146,4 +146,7 @@ leak a secret to an innocent user; `SYSTEM:`-framed injections hijack 10/10). We
 exercised surface #3 — see [finding 003](../findings/003-chromadb-unauth) (stock
 ChromaDB in default config: unauthenticated dump, poison, and delete of a vector store;
 the destructive `/reset` is now disabled by default but `DELETE /collections/{name}`
-is not). Next: Week 5 — surface #1, Ollama exposed on `0.0.0.0`.*
+is not). Week 5 exercised surface #1 — see [finding 004](../findings/004-exposed-ollama)
+(unauthenticated Ollama API: enumerate models and run inference on the host's hardware
+with no credentials; `/api/pull` and `/api/delete` are one unauthenticated call away).
+Next: Week 6 — system-prompt extraction across models.*
